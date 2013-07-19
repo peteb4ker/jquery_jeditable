@@ -343,7 +343,9 @@
                                   dataType: 'html',
                                   url     : settings.target,
                                   success : function(result, status) {
-                                      if (ajaxoptions.dataType == 'html') {
+                                	  if (status = "nocontent") {
+                                		$(self).html(input.val());
+                                	  } else if (ajaxoptions.dataType == 'html') {
                                         $(self).html(result);
                                       }
                                       self.editing = false;
