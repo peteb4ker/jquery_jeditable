@@ -413,6 +413,12 @@
                 },
                 buttons : function(settings, original) {
                     var form = this;
+                    
+                    if (! settings.submit || !settings.cancel) return;
+                    
+                    var buttonContainer = $("<div class='buttons' />");
+                    $(this).append(buttonContainer);
+                    
                     if (settings.submit) {
                         /* If given html string use that. */
                         if (settings.submit.match(/>$/)) {
@@ -426,7 +432,7 @@
                             var submit = $('<button type="submit" />');
                             submit.html(settings.submit);                            
                         }
-                        $(this).append(submit);
+                        buttonContainer.append(submit);
                     }
                     if (settings.cancel) {
                         /* If given html string use that. */
@@ -437,7 +443,7 @@
                             var cancel = $('<button type="cancel" />');
                             cancel.html(settings.cancel);
                         }
-                        $(this).append(cancel);
+                        buttonContainer.append(cancel);
 
                         $(cancel).click(function(event) {
                             if ($.isFunction($.editable.types[settings.type].reset)) {
