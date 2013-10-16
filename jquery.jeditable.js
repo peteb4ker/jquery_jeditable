@@ -95,6 +95,9 @@
         var onsubmit = settings.onsubmit || function() { };
         var onreset  = settings.onreset  || function() { };
         var onerror  = settings.onerror  || reset;
+        var beforeedit = settings.beforeedit || $.noop;
+        var afteredit = settings.afteredit || $.noop;
+
           
         /* Show tooltip. */
         if (settings.tooltip) {
@@ -123,7 +126,8 @@
             }
             
             $(this).bind(settings.event, function(e) {
-                
+                beforeedit.apply(self);
+            	
                 /* Abort if element is disabled. */
                 if (true === $(this).data('disabled.editable')) {
                     return;
@@ -370,6 +374,8 @@
                     /* Show tooltip again. */
                     $(self).attr('title', settings.tooltip);
                     
+                    afteredit.apply(self);
+                    
                     return false;
                 });
             });
@@ -391,6 +397,8 @@
                         }
                     }                    
                 }
+                
+                afteredit.apply(self);
             };            
         });
 
