@@ -360,6 +360,9 @@
                                   },
                                   error   : function(xhr, status, error) {
                                       onerror.apply(form, [settings, self, xhr]);
+                                  },
+                                  complete : function() {
+                                      afteredit.apply(self);
                                   }
                               };
                               
@@ -373,8 +376,6 @@
                     
                     /* Show tooltip again. */
                     $(self).attr('title', settings.tooltip);
-                    
-                    afteredit.apply(self);
                     
                     return false;
                 });
