@@ -116,7 +116,7 @@
             /* Save them for later use as workaround. */
             var savedwidth  = $(self).width();
             var savedheight = $(self).height();
-
+            
             /* Save so it can be later used by $.editable('destroy') */
             $(this).data('event.editable', settings.event);
             
@@ -154,7 +154,7 @@
                 
                 /* Figure out how wide and tall we are, saved width and height. */
                 /* Workaround for http://dev.jquery.com/ticket/2190 */
-                if (0 == $(self).width()) {
+                if (0 == $(self).width() && savedwidth !== 0) {
                     settings.width  = savedwidth;
                     settings.height = savedheight;
                 } else {
